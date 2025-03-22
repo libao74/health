@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>健康体检合格证明</title>
     <style>
-        /* 严格匹配原图样式 */
         body {
             margin: 0;
             padding: 20px;
-            background: #F0F8FF; /* 原图浅蓝色背景 */
-            font-family: "宋体", SimSun, sans-serif;
+            background: #F0F8FF;
+            font-family: "宋体", SimSun, serif;
         }
 
         .cert-container {
-            width: 800px;
+            width: 100%;
+            max-width: 800px;
             margin: 0 auto;
             background: white;
             padding: 25px;
@@ -30,19 +30,12 @@
             padding-bottom: 10px;
         }
 
-        .content-wrapper {
-            display: flex;
-            gap: 30px;
-        }
-
-        /* 照片区域严格还原 */
         .photo-section {
             width: 200px;
             height: 260px;
             border: 1px solid #999;
-            background: white;
+            margin: 0 auto 20px;
             padding: 5px;
-            margin-right: 20px;
         }
 
         .photo {
@@ -51,32 +44,35 @@
             object-fit: cover;
         }
 
-        /* 信息表格精准还原 */
-        .info-section {
-            flex: 1;
-            font-size: 14px;
-            line-height: 2;
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
         }
 
-        .info-row {
-            display: flex;
-            margin-bottom: 5px;
+        .info-table td {
+            padding: 8px 15px;
+            border-bottom: 1px solid #EEE;
         }
 
         .info-label {
-            width: 80px;
+            width: 120px;
             color: #666;
         }
 
         .valid-period {
-            margin: 20px 0;
             color: #333;
+            margin: 20px 0;
+            font-weight: bold;
         }
 
         .issuer {
-            color: red;
-            font-weight: bold;
-            margin-top: 15px;
+            color: #FF0000;
+            text-align: center;
+            font-size: 15px;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 2px dashed #CCC;
         }
     </style>
 </head>
@@ -84,47 +80,43 @@
     <div class="cert-container">
         <div class="header">沈阳市从业人员健康体检合格证明</div>
         
-        <div class="content-wrapper">
-            <!-- 照片区域 -->
-            <div class="photo-section">
-                <img src="avatar.jpg" alt="证件照" class="photo">
-            </div>
+        <div class="photo-section">
+            <img src="avatar.jpg" alt="证件照" class="photo">
+        </div>
 
-            <!-- 信息区域 -->
-            <div class="info-section">
-                <div class="info-row">
-                    <div class="info-label">姓名：</div>
-                    <div>张运范</div>
-                </div>
-                <div class="info-row">
-                    <div class="info-label">性别：</div>
-                    <div>女</div>
-                </div>
-                <div class="info-row">
-                    <div class="info-label">年龄：</div>
-                    <div>62</div>
-                </div>
-                <div class="info-row">
-                    <div class="info-label">健康证号：</div>
-                    <div>70251005285</div>
-                </div>
-                <div class="info-row">
-                    <div class="info-label">行业：</div>
-                    <div>食品</div>
-                </div>
-                <div class="info-row">
-                    <div class="info-label">单位：</div>
-                    <div>个人</div>
-                </div>
+        <table class="info-table">
+            <tr>
+                <td class="info-label">姓　　名：</td>
+                <td>张运范</td>
+            </tr>
+            <tr>
+                <td class="info-label">性　　别：</td>
+                <td>女</td>
+            </tr>
+            <tr>
+                <td class="info-label">年　　龄：</td>
+                <td>62</td>
+            </tr>
+            <tr>
+                <td class="info-label">健康证号：</td>
+                <td>70251005285</td>
+            </tr>
+            <tr>
+                <td class="info-label">从　　业：</td>
+                <td>食品</td>
+            </tr>
+            <tr>
+                <td class="info-label">单　　位：</td>
+                <td>个人</td>
+            </tr>
+        </table>
 
-                <div class="valid-period">
-                    有效期：2025年03月16日到2026年03月15日
-                </div>
+        <div class="valid-period">
+            有效期：2025年03月16日到2026年03月15日
+        </div>
 
-                <div class="issuer">
-                    制证单位：众康（沈阳）综合门诊有限公司健康综合门诊部
-                </div>
-            </div>
+        <div class="issuer">
+            制证单位：众康（沈阳）综合门诊有限公司健康综合门诊部
         </div>
     </div>
 </body>
