@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>访问提示</title>
+    <style>
+        /* 严格还原截图样式 */
+        body {
+            background: #fff;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .warning-card {
+            width: 100%;
+            max-width: 375px;
+            text-align: center;
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: #1890FF;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .url-box {
+            background: #F5F5F5;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 20px 0;
+            font-family: monospace;
+            word-break: break-all;
+        }
+
+        .tip-text {
+            color: #666;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+
+        .continue-btn {
+            background: #1890FF;
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .continue-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="warning-card">
+        <div class="info-icon">i</div>
+        <h3>将要访问</h3>
+        
+        <div class="url-box">
+            http://47.76.214.32/index?dwbm=79643&amp;tjbh=70251005285
+        </div>
+
+        <p class="tip-text">该地址为IP地址，请使用域名访问网站</p>
+
+        <button class="continue-btn" onclick="redirectToCert()">
+            继续访问
+        </button>
+    </div>
+
+    <script>
+        function redirectToCert() {
+            // 跳转到健康证信息页（替换为你的实际地址）
+            window.location.href = 'https://你的用户名.github.io/仓库名/';
+        }
+    </script>
+</body>
+</html>
