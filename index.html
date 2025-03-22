@@ -5,41 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>健康体检合格证明</title>
     <style>
-        .photo-section {
-  margin: 0 auto 20px;  /* 照片居中显示在标题下方 */
-}
-
-.info-section {
-  width: 60%;          /* 信息区域居中缩进 */
-}
-        /* 精确还原原图样式 */
+        /* 严格匹配原图样式 */
         body {
             margin: 0;
             padding: 20px;
-            background: #FFFFFF;
-            font-family: "微软雅黑", sans-serif;
+            background: #F0F8FF; /* 原图浅蓝色背景 */
+            font-family: "宋体", SimSun, sans-serif;
         }
 
         .cert-container {
             width: 800px;
             margin: 0 auto;
-            border: 1px solid #E0E0E0;
+            background: white;
             padding: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .header {
             text-align: center;
             font-size: 22px;
-            color: #333333;
+            color: #333;
             margin-bottom: 25px;
-            font-weight: bold;
+            border-bottom: 2px solid #1E90FF;
+            padding-bottom: 10px;
         }
 
+        .content-wrapper {
+            display: flex;
+            gap: 30px;
+        }
+
+        /* 照片区域严格还原 */
         .photo-section {
             width: 200px;
             height: 260px;
-            border: 1px solid #CCCCCC;
-            margin: 0 auto 20px;
+            border: 1px solid #999;
+            background: white;
+            padding: 5px;
+            margin-right: 20px;
         }
 
         .photo {
@@ -48,34 +51,31 @@
             object-fit: cover;
         }
 
+        /* 信息表格精准还原 */
         .info-section {
+            flex: 1;
             font-size: 14px;
-            color: #333333;
-            line-height: 1.8;
-            width: 60%;
-            margin: 0 auto;
+            line-height: 2;
         }
 
         .info-row {
             display: flex;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .info-label {
             width: 80px;
-            font-weight: normal;
+            color: #666;
         }
 
         .valid-period {
-            margin: 25px 0;
-            text-align: center;
-            font-size: 14px;
+            margin: 20px 0;
+            color: #333;
         }
 
         .issuer {
-            color: #FF0000;
+            color: red;
             font-weight: bold;
-            text-align: center;
             margin-top: 15px;
         }
     </style>
@@ -83,44 +83,48 @@
 <body>
     <div class="cert-container">
         <div class="header">沈阳市从业人员健康体检合格证明</div>
+        
+        <div class="content-wrapper">
+            <!-- 照片区域 -->
+            <div class="photo-section">
+                <img src="avatar.jpg" alt="证件照" class="photo">
+            </div>
 
-        <!-- 照片区域（位于姓名上方） -->
-        <div class="photo-section">
-            <img src="avatar.jpg" alt="证件照" class="photo">
-        </div>
+            <!-- 信息区域 -->
+            <div class="info-section">
+                <div class="info-row">
+                    <div class="info-label">姓名：</div>
+                    <div>张运范</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">性别：</div>
+                    <div>女</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">年龄：</div>
+                    <div>62</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">健康证号：</div>
+                    <div>70251005285</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">行业：</div>
+                    <div>食品</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">单位：</div>
+                    <div>个人</div>
+                </div>
 
-        <!-- 信息区域 -->
-        <div class="info-section">
-            <div class="info-row">
-                <span class="info-label">姓名：</span>
-                <span>张运范</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">性别：</span>
-                <span>女</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">年龄：</span>
-                <span>62</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">健康证号：</span>
-                <span>70251005285</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">行业：</span>
-                <span>食品</span>
-            </div>
-        </div>
+                <div class="valid-period">
+                    有效期：2025年03月16日到2026年03月15日
+                </div>
 
-        <!-- 有效期 -->
-        <div class="valid-period">
-            有效期：2025年03月16日到2026年03月15日
-        </div>
-
-        <!-- 制证单位 -->
-        <div class="issuer">
-            制证单位：众康（沈阳）综合门诊有限公司
+                <div class="issuer">
+                    制证单位：众康（沈阳）综合门诊有限公司健康综合门诊部
+                </div>
+            </div>
         </div>
     </div>
 </body>
