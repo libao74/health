@@ -5,21 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>健康体检合格证明</title>
     <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            background: #F0F8FF;
-            font-family: "宋体", SimSun, serif;
-        }
+       body {
+    /* 专业级渐变背景 */
+    background: linear-gradient(145deg, 
+        #e3f2fd 0%, 
+        #f0f8ff 35%, 
+        #e6f0ff 100%
+    );
+    background-attachment: fixed;
+    min-height: 100vh;
+}
 
-        .cert-container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 25px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+.cert-container {
+    /* 保持内容区域纯净白色 */
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(3px);
+}
 
         .header {
             text-align: center;
