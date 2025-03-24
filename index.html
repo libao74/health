@@ -7,6 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>健康证明</title>
     <style>
+        /* 设置body元素的外边距和内边距为0 */
+        body {
+            margin: 0;
+            padding: 0;
+        }
         /* 设置canvas元素宽度为100%，高度自适应 */
         canvas {
             width: 100%;
@@ -163,18 +168,18 @@
             ctx.fillStyle = 'black';
             ctx.fillText('姓名：', 150 * scaleFactor, infoY);
             ctx.fillStyle = 'black';
-            ctx.fillText('梁伟', 250 * scaleFactor, infoY);
+            ctx.fillText('小猪佩奇', 250 * scaleFactor, infoY);
             ctx.fillStyle = 'black';
             ctx.fillText('性别：', 350 * scaleFactor, infoY);
             const alignX = 480 * scaleFactor; // 用于对齐的x坐标，按比例缩放
             ctx.fillStyle = 'black';
-            ctx.fillText('男', alignX, infoY);
+            ctx.fillText('母', alignX, infoY);
 
             infoY += 30 * scaleFactor;
             ctx.fillStyle = 'black';
             ctx.fillText('年龄：', 150 * scaleFactor, infoY);
             ctx.fillStyle = 'black';
-            ctx.fillText('25', 250 * scaleFactor, infoY);
+            ctx.fillText('18', 250 * scaleFactor, infoY);
             ctx.fillStyle = 'black';
             ctx.fillText('健康证号：', 350 * scaleFactor, infoY);
             ctx.fillStyle = 'black';
@@ -188,7 +193,7 @@
             ctx.fillStyle = 'black';
             ctx.fillText('单位：', 350 * scaleFactor, infoY);
             ctx.fillStyle = 'black';
-            ctx.fillText('美团', alignX, infoY);
+            ctx.fillText('猪圈', alignX, infoY);
 
             infoY += 30 * scaleFactor;
             ctx.fillStyle = 'black';
