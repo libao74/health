@@ -1,125 +1,166 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>健康体检合格证明</title>
-    <style>
-       body {
-    /* 专业级渐变背景 */
-    background: linear-gradient(145deg, 
-        #e3f2fd 0%, 
-        #f0f8ff 35%, 
-        #e6f0ff 100%
-    );
-    background-attachment: fixed;
-    min-height: 100vh;
-}
-
-/* 证件容器（透明背景） */
-        .cert-container {
-            width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .header {
-            text-align: center;
-            font-size: 22px;
-            color: #333;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #1E90FF;
-            padding-bottom: 10px;
-        }
-
-        .photo-section {
-            width: 200px;
-            height: 260px;
-            border: 1px solid #999;
-            margin: 0 auto 20px;
-            padding: 5px;
-        }
-
-        .photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .info-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 16px;
-        }
-
-        .info-table td {
-            padding: 8px 15px;
-            border-bottom: 1px solid #EEE;
-        }
-
-        .info-label {
-            width: 120px;
-            color: #666;
-        }
-
-        .valid-period {
-            color: #333;
-            margin: 20px 0;
-            font-weight: bold;
-        }
-
-        .issuer {
-            color: #FF0000;
-            text-align: center;
-            font-size: 15px;
-            margin-top: 25px;
-            padding-top: 15px;
-            border-top: 2px dashed #CCC;
-        }
-    </style>
+    <title>健康证明</title>
 </head>
+
 <body>
-    <div class="cert-container">
-        <div class="header">沈阳市从业人员健康体检合格证明</div>
-        
-        <div class="photo-section">
-            <img src="avatar.jpg" alt="证件照" class="photo">
-        </div>
+    <canvas id="health-certificate" width="800" height="1200"></canvas>
+    <script>
+        // 获取canvas元素和绘图上下文
+        const canvas = document.getElementById('health-certificate');
+        const ctx = canvas.getContext('2d');
 
-        <table class="info-table">
-            <tr>
-                <td class="info-label">姓　　名：</td>
-                <td>张运范</td>
-            </tr>
-            <tr>
-                <td class="info-label">性　　别：</td>
-                <td>女</td>
-            </tr>
-            <tr>
-                <td class="info-label">年　　龄：</td>
-                <td>62</td>
-            </tr>
-            <tr>
-                <td class="info-label">健康证号：</td>
-                <td>70251005285</td>
-            </tr>
-            <tr>
-                <td class="info-label">从　　业：</td>
-                <td>食品</td>
-            </tr>
-            <tr>
-                <td class="info-label">单　　位：</td>
-                <td>个人</td>
-            </tr>
-        </table>
+        // 创建背景图片，设置蓝色渐变
+        const width = 800;
+        const height = 1200;
+        const ageRowY = 360; // 年龄那行的y坐标，姓名行y=300，每行间隔30，年龄行是第四行
+        for (let y = 0; y < ageRowY; y++) {
+            const r = Math.floor(173 + (y / ageRowY) * 82);
+            const g = Math.floor(217 + (y / ageRowY) * 38);
+            const b = Math.floor(236 + (y / ageRowY) * 19);
+            ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+            ctx.fillRect(0, y, width, 1);
+        }
 
-        <div class="valid-period">
-            有效期：2025年03月16日到2026年03月15日
-        </div>
+        // 绘制剩余白色部分
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, ageRowY, width, height - ageRowY);
 
-        <div class="issuer">
-            制证单位：众康（沈阳）综合门诊有限公司健康综合门诊部
-        </div>
-    </div>
+        // 设置字体样式
+        ctx.font = '24px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = 'black';
+
+        // 绘制标题
+        ctx.fillText('沈阳市从业人员健康体检合格证明', width / 2, 30);
+
+        // 加载照片
+        const photo = new Image();
+        photo.src = 'avatar.jpg'; // 请替换为实际的照片文件名
+
+        photo.onload = function () {
+            const photoSize = 150;
+            const photoX = width / 2 - photoSize / 2;
+            const photoY = 60; // 标题下方的位置，可根据需要调整
+
+            // 绘制照片
+            ctx.drawImage(photo, photoX, photoY, photoSize, photoSize);
+
+            // 设置普通字体样式
+            ctx.font = '18px Arial';
+            ctx.textAlign = 'left';
+
+            // 绘制个人信息
+            let infoY = 300;
+            ctx.fillStyle = 'black';
+            ctx.fillText('姓名：', 150, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('梁伟', 250, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('性别：', 350, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('男', 420, infoY);
+
+            infoY += 30;
+            ctx.fillStyle = 'black';
+            ctx.fillText('年龄：', 150, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('25', 250, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('健康证号：', 350, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('241005270', 480, infoY);
+
+            infoY += 30;
+            ctx.fillStyle = 'black';
+            ctx.fillText('行业：', 150, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('食品', 250, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('单位：', 350, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('美团', 420, infoY);
+
+            infoY += 30;
+            ctx.fillStyle = 'black';
+            ctx.fillText('有效期：', 150, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('2024年11月24日到2025年11月23日', 250, infoY);
+
+            // 设置红色字体样式
+            ctx.font = '18px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = 'red';
+
+            // 绘制制证单位（红色字体）
+            ctx.fillText('制证单位：沈阳惠尔斯中医院有限公司', width / 2, height - 50);
+        };
+
+        photo.onerror = function () {
+            console.error('照片加载失败，请检查照片路径和文件是否存在。');
+            // 即使照片加载失败，也继续绘制其他信息
+            const photoSize = 150;
+            const photoX = width / 2 - photoSize / 2;
+            const photoY = 60; // 标题下方的位置，可根据需要调整
+
+            // 绘制白色矩形代替照片
+            ctx.fillStyle = 'white';
+            ctx.fillRect(photoX, photoY, photoSize, photoSize);
+
+            // 设置普通字体样式
+            ctx.font = '18px Arial';
+            ctx.textAlign = 'left';
+
+            // 绘制个人信息
+            let infoY = 300;
+            ctx.fillStyle = 'black';
+            ctx.fillText('姓名：', 150, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('梁伟', 250, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('性别：', 350, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('男', 420, infoY);
+
+            infoY += 30;
+            ctx.fillStyle = 'black';
+            ctx.fillText('年龄：', 150, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('25', 250, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('健康证号：', 350, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('241005270', 480, infoY);
+
+            infoY += 30;
+            ctx.fillStyle = 'black';
+            ctx.fillText('行业：', 150, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('食品', 250, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('单位：', 350, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('美团', 420, infoY);
+
+            infoY += 30;
+            ctx.fillStyle = 'black';
+            ctx.fillText('有效期：', 150, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('2024年11月24日到2025年11月23日', 250, infoY);
+
+            // 设置红色字体样式
+            ctx.font = '18px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = 'red';
+
+            // 绘制制证单位（红色字体）
+            ctx.fillText('制证单位：沈阳惠尔斯中医院有限公司', width / 2, height - 50);
+        };
+    </script>
 </body>
+
 </html>
