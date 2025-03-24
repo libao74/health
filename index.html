@@ -30,22 +30,32 @@
         ctx.fillStyle = 'white';
         ctx.fillRect(0, ageRowY, width, height - ageRowY);
 
-        // 设置字体样式
+        // 设置大字体样式
         ctx.font = '24px Arial';
         ctx.textAlign = 'center';
         ctx.fillStyle = 'black';
 
-        // 绘制标题
-        ctx.fillText('沈阳市从业人员健康体检合格证明', width / 2, 30);
+        // 绘制“沈阳市”
+        ctx.fillText('沈阳市', width / 2 - 75, 35);
+        // 绘制“合格证明”
+        ctx.fillText('合格证明', width / 2 + 80, 35);
+
+        // 设置小字体样式
+        ctx.font = '16px Arial';
+
+        // 绘制“从业人员”，调整y坐标
+        ctx.fillText('从业人员', width / 2, 20);
+        // 绘制“健康体检”，调整y坐标
+        ctx.fillText('健康体检', width / 2, 45);
 
         // 加载照片
         const photo = new Image();
-        photo.src = 'avatar.jpg'; // 请替换为实际的照片文件名
+        photo.src = 'your_photo.jpg'; // 请替换为实际的照片文件名
 
         photo.onload = function () {
             const photoSize = 150;
             const photoX = width / 2 - photoSize / 2;
-            const photoY = 60; // 标题下方的位置，可根据需要调整
+            const photoY = 80; // 调整照片位置
 
             // 绘制照片
             ctx.drawImage(photo, photoX, photoY, photoSize, photoSize);
@@ -54,26 +64,29 @@
             ctx.font = '18px Arial';
             ctx.textAlign = 'left';
 
+            // 缩减照片与姓名行的距离，减小infoY的值
+            let infoY = 270;
+
             // 绘制个人信息
-            let infoY = 300;
             ctx.fillStyle = 'black';
             ctx.fillText('姓名：', 150, infoY);
             ctx.fillStyle = 'black';
-            ctx.fillText('梁伟', 250, infoY);
+            ctx.fillText('小猪佩奇', 250, infoY);
             ctx.fillStyle = 'black';
             ctx.fillText('性别：', 350, infoY);
+            const alignX = 480; // 用于对齐的x坐标
             ctx.fillStyle = 'black';
-            ctx.fillText('男', 420, infoY);
+            ctx.fillText('母', alignX, infoY);
 
             infoY += 30;
             ctx.fillStyle = 'black';
             ctx.fillText('年龄：', 150, infoY);
             ctx.fillStyle = 'black';
-            ctx.fillText('25', 250, infoY);
+            ctx.fillText('18', 250, infoY);
             ctx.fillStyle = 'black';
             ctx.fillText('健康证号：', 350, infoY);
             ctx.fillStyle = 'black';
-            ctx.fillText('241005270', 480, infoY);
+            ctx.fillText('241005270', alignX, infoY);
 
             infoY += 30;
             ctx.fillStyle = 'black';
@@ -83,7 +96,7 @@
             ctx.fillStyle = 'black';
             ctx.fillText('单位：', 350, infoY);
             ctx.fillStyle = 'black';
-            ctx.fillText('美团', 420, infoY);
+            ctx.fillText('猪圈', alignX, infoY);
 
             infoY += 30;
             ctx.fillStyle = 'black';
@@ -96,8 +109,9 @@
             ctx.textAlign = 'center';
             ctx.fillStyle = 'red';
 
-            // 绘制制证单位（红色字体）
-            ctx.fillText('制证单位：沈阳惠尔斯中医院有限公司', width / 2, height - 50);
+            // 绘制制证单位（红色字体），放在有效期下面隔两行
+            infoY += 60;
+            ctx.fillText('制证单位：沈阳惠尔斯中医院有限公司', width / 2, infoY);
         };
 
         photo.onerror = function () {
@@ -105,7 +119,7 @@
             // 即使照片加载失败，也继续绘制其他信息
             const photoSize = 150;
             const photoX = width / 2 - photoSize / 2;
-            const photoY = 60; // 标题下方的位置，可根据需要调整
+            const photoY = 80; // 调整照片位置
 
             // 绘制白色矩形代替照片
             ctx.fillStyle = 'white';
@@ -115,16 +129,19 @@
             ctx.font = '18px Arial';
             ctx.textAlign = 'left';
 
+            // 缩减照片与姓名行的距离，减小infoY的值
+            let infoY = 270;
+
             // 绘制个人信息
-            let infoY = 300;
             ctx.fillStyle = 'black';
             ctx.fillText('姓名：', 150, infoY);
             ctx.fillStyle = 'black';
             ctx.fillText('梁伟', 250, infoY);
             ctx.fillStyle = 'black';
             ctx.fillText('性别：', 350, infoY);
+            const alignX = 480; // 用于对齐的x坐标
             ctx.fillStyle = 'black';
-            ctx.fillText('男', 420, infoY);
+            ctx.fillText('男', alignX, infoY);
 
             infoY += 30;
             ctx.fillStyle = 'black';
@@ -134,7 +151,7 @@
             ctx.fillStyle = 'black';
             ctx.fillText('健康证号：', 350, infoY);
             ctx.fillStyle = 'black';
-            ctx.fillText('241005270', 480, infoY);
+            ctx.fillText('241005270', alignX, infoY);
 
             infoY += 30;
             ctx.fillStyle = 'black';
@@ -144,7 +161,7 @@
             ctx.fillStyle = 'black';
             ctx.fillText('单位：', 350, infoY);
             ctx.fillStyle = 'black';
-            ctx.fillText('美团', 420, infoY);
+            ctx.fillText('美团', alignX, infoY);
 
             infoY += 30;
             ctx.fillStyle = 'black';
@@ -157,8 +174,9 @@
             ctx.textAlign = 'center';
             ctx.fillStyle = 'red';
 
-            // 绘制制证单位（红色字体）
-            ctx.fillText('制证单位：沈阳惠尔斯中医院有限公司', width / 2, height - 50);
+            // 绘制制证单位（红色字体），放在有效期下面隔两行
+            infoY += 60;
+            ctx.fillText('制证单位：沈阳惠尔斯中医院有限公司', width / 2, infoY);
         };
     </script>
 </body>
