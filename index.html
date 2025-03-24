@@ -22,14 +22,26 @@
         const canvas = document.getElementById('health-certificate');
         const ctx = canvas.getContext('2d');
 
+        // 获取设备像素比
+        const devicePixelRatio = window.devicePixelRatio || 1;
+
         // 根据设备屏幕宽度动态设置canvas大小
         const deviceWidth = window.innerWidth;
         const scaleFactor = deviceWidth / 800; // 假设原始设计宽度为800
-        canvas.width = deviceWidth;
-        canvas.height = 1200 * scaleFactor;
 
-        const width = canvas.width;
-        const height = canvas.height;
+        // 根据设备像素比调整canvas的实际大小
+        canvas.width = deviceWidth * devicePixelRatio;
+        canvas.height = 1200 * scaleFactor * devicePixelRatio;
+
+        // 调整canvas的样式大小
+        canvas.style.width = deviceWidth + 'px';
+        canvas.style.height = 1200 * scaleFactor + 'px';
+
+        // 缩放绘图上下文
+        ctx.scale(devicePixelRatio, devicePixelRatio);
+
+        const width = canvas.width / devicePixelRatio;
+        const height = canvas.height / devicePixelRatio;
         const ageRowY = 360 * scaleFactor; // 年龄那行的y坐标，按比例缩放
 
         // 创建背景图片，设置蓝色渐变
@@ -65,7 +77,7 @@
 
         // 加载照片
         const photo = new Image();
-        photo.src = 'avatar.jpg'; // 请替换为实际的照片文件名
+        photo.src = 'your_photo.jpg'; // 请替换为实际的照片文件名
 
         photo.onload = function () {
             const photoSize = 150 * scaleFactor;
@@ -86,18 +98,18 @@
             ctx.fillStyle = 'black';
             ctx.fillText('姓名：', 150 * scaleFactor, infoY);
             ctx.fillStyle = 'black';
-            ctx.fillText('小猪佩奇', 250 * scaleFactor, infoY);
+            ctx.fillText('梁伟', 250 * scaleFactor, infoY);
             ctx.fillStyle = 'black';
             ctx.fillText('性别：', 350 * scaleFactor, infoY);
             const alignX = 480 * scaleFactor; // 用于对齐的x坐标，按比例缩放
             ctx.fillStyle = 'black';
-            ctx.fillText('母', alignX, infoY);
+            ctx.fillText('男', alignX, infoY);
 
             infoY += 30 * scaleFactor;
             ctx.fillStyle = 'black';
             ctx.fillText('年龄：', 150 * scaleFactor, infoY);
             ctx.fillStyle = 'black';
-            ctx.fillText('18', 250 * scaleFactor, infoY);
+            ctx.fillText('25', 250 * scaleFactor, infoY);
             ctx.fillStyle = 'black';
             ctx.fillText('健康证号：', 350 * scaleFactor, infoY);
             ctx.fillStyle = 'black';
@@ -111,7 +123,7 @@
             ctx.fillStyle = 'black';
             ctx.fillText('单位：', 350 * scaleFactor, infoY);
             ctx.fillStyle = 'black';
-            ctx.fillText('猪圈', alignX, infoY);
+            ctx.fillText('美团', alignX, infoY);
 
             infoY += 30 * scaleFactor;
             ctx.fillStyle = 'black';
