@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 视口元标签，确保页面在不同设备上正确缩放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健康证明</title>
+    <style>
+        /* 设置body元素的外边距和内边距为0 */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        /* 设置canvas元素宽度为100%，高度自适应 */
+        canvas {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="health-certificate"></canvas>
+    <script>
+        // 获取canvas元素和绘图上下文
+        const canvas = document.getElementById('health-certificate');
+        const ctx = canvas.getContext('2d');
+
+        // 获取设备像素比
+        const devicePixelRatio = window.devicePixelRatio || 1;
+
+        // 根据设备屏幕宽度动态设置canvas大小
+        const deviceWidth = window.innerWidth;
+        const scaleFactor = deviceWidth / 800; // 假设原始设计宽度为800
+
+        // 根据设备像素比调整canvas的实际大小
+        canvas.width = deviceWidth * devicePixelRatio;
+        canvas.height = 1200 * scaleFactor * devicePixelRatio;
+
+        // 调整canvas的样式大小
+        canvas.style.width = deviceWidth + 'px';
+        canvas.style.height = 1200 * scaleFactor + 'px';
+
+        // 缩放绘图上下文
+        ctx.scale(devicePixelRatio, devicePixelRatio);
+
+        const width = canvas.width / devicePixelRatio;
+        const height = canvas.height / devicePixelRatio;
+        const ageRowY = 360 * scaleFactor; // 年龄那行的y坐标，按比例缩放
+
+        // 创建背景图片，设置蓝色渐变
+        for (let y = 0; y < ageRowY; y++) {
+            const r = Math.floor(173 + (y / ageRowY) * 82);
+            const g = Math.floor(217 + (y / ageRowY) * 38);
+            const b = Math.floor(236 + (y / ageRowY) * 19);
+            ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+            ctx.fillRect(0, y, width, 1);
+        }
+
+        // 绘制剩余白色部分
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, ageRowY, width, height - ageRowY);
+
+        // 设置大字体样式，按比例缩放字体大小
+        ctx.font = `${24 * scaleFactor}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.fillStyle = 'black';
+
+        // 绘制“沈阳市”，按比例缩放位置
+        ctx.fillText('沈阳市', width / 2 - 75 * scaleFactor, 35 * scaleFactor);
+        // 绘制“合格证明”，按比例缩放位置
+        ctx.fillText('合格证明', width / 2 + 80 * scaleFactor, 35 * scaleFactor);
+
+        // 设置小字体样式，按比例缩放字体大小
+        ctx.font = `${16 * scaleFactor}px Arial`;
+
+        // 绘制“从业人员”，调整y坐标，按比例缩放位置
+        ctx.fillText('从业人员', width / 2, 20 * scaleFactor);
+        // 绘制“健康体检”，调整y坐标，按比例缩放位置
+        ctx.fillText('健康体检', width / 2, 45 * scaleFactor);
+
+        // 加载照片
+        const photo = new Image();
+        photo.src = 'avatar.jpg'; // 请替换为实际的照片文件名
+
+        photo.onload = function () {
+            const photoSize = 150 * scaleFactor;
+            const photoX = width / 2 - photoSize / 2;
+            const photoY = 80 * scaleFactor; // 调整照片位置，按比例缩放
+
+            // 绘制照片
+            ctx.drawImage(photo, photoX, photoY, photoSize, photoSize);
+
+            // 设置普通字体样式，按比例缩放字体大小
+            ctx.font = `${18 * scaleFactor}px Arial`;
+            ctx.textAlign = 'left';
+
+            // 缩减照片与姓名行的距离，减小infoY的值，按比例缩放
+            let infoY = 270 * scaleFactor;
+
+            // 绘制个人信息，按比例缩放位置
+            ctx.fillStyle = 'black';
+            ctx.fillText('姓名：', 150 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('梁伟', 250 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('性别：', 350 * scaleFactor, infoY);
+            const alignX = 480 * scaleFactor; // 用于对齐的x坐标，按比例缩放
+            ctx.fillStyle = 'black';
+            ctx.fillText('男', alignX, infoY);
+
+            infoY += 30 * scaleFactor;
+            ctx.fillStyle = 'black';
+            ctx.fillText('年龄：', 150 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('25', 250 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('健康证号：', 350 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('241005270', alignX, infoY);
+
+            infoY += 30 * scaleFactor;
+            ctx.fillStyle = 'black';
+            ctx.fillText('行业：', 150 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('食品', 250 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('单位：', 350 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('美团', alignX, infoY);
+
+            infoY += 30 * scaleFactor;
+            ctx.fillStyle = 'black';
+            ctx.fillText('有效期：', 150 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('2024年11月24日到2025年11月23日', 250 * scaleFactor, infoY);
+
+            // 设置红色字体样式，按比例缩放字体大小
+            ctx.font = `${18 * scaleFactor}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.fillStyle = 'red';
+
+            // 绘制制证单位（红色字体），放在有效期下面隔两行，按比例缩放位置
+            infoY += 60 * scaleFactor;
+            ctx.fillText('制证单位：沈阳惠尔斯中医院有限公司', width / 2, infoY);
+        };
+
+        photo.onerror = function () {
+            console.error('照片加载失败，请检查照片路径和文件是否存在。');
+            // 即使照片加载失败，也继续绘制其他信息
+            const photoSize = 150 * scaleFactor;
+            const photoX = width / 2 - photoSize / 2;
+            const photoY = 80 * scaleFactor; // 调整照片位置，按比例缩放
+
+            // 绘制白色矩形代替照片
+            ctx.fillStyle = 'white';
+            ctx.fillRect(photoX, photoY, photoSize, photoSize);
+
+            // 设置普通字体样式，按比例缩放字体大小
+            ctx.font = `${18 * scaleFactor}px Arial`;
+            ctx.textAlign = 'left';
+
+            // 缩减照片与姓名行的距离，减小infoY的值，按比例缩放
+            let infoY = 270 * scaleFactor;
+
+            // 绘制个人信息，按比例缩放位置
+            ctx.fillStyle = 'black';
+            ctx.fillText('姓名：', 150 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('梁伟', 250 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('性别：', 350 * scaleFactor, infoY);
+            const alignX = 480 * scaleFactor; // 用于对齐的x坐标，按比例缩放
+            ctx.fillStyle = 'black';
+            ctx.fillText('男', alignX, infoY);
+
+            infoY += 30 * scaleFactor;
+            ctx.fillStyle = 'black';
+            ctx.fillText('年龄：', 150 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('25', 250 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('健康证号：', 350 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('241005270', alignX, infoY);
+
+            infoY += 30 * scaleFactor;
+            ctx.fillStyle = 'black';
+            ctx.fillText('行业：', 150 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('食品', 250 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('单位：', 350 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('美团', alignX, infoY);
+
+            infoY += 30 * scaleFactor;
+            ctx.fillStyle = 'black';
+            ctx.fillText('有效期：', 150 * scaleFactor, infoY);
+            ctx.fillStyle = 'black';
+            ctx.fillText('2024年11月24日到2025年11月23日', 250 * scaleFactor, infoY);
+
+            // 设置红色字体样式，按比例缩放字体大小
+            ctx.font = `${18 * scaleFactor}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.fillStyle = 'red';
+
+            // 绘制制证单位（红色字体），放在有效期下面隔两行，按比例缩放位置
+            infoY += 60 * scaleFactor;
+            ctx.fillText('制证单位：沈阳惠尔斯中医院有限公司', width / 2, infoY);
+        };
+    </script>
+</body>
+
+</html>
